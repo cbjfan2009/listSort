@@ -1,7 +1,7 @@
  # Purpose: open mailing address lists to re-sort trays based on most-full trays first
-import csv, os
+import csv
 from tkinter import filedialog as fd
-from pprint import pprint
+
 
 # OPEN CSV, EXTRACT HEADERS AND ROWS
 
@@ -37,11 +37,6 @@ for x in headers:
         if v == 'Tray_Number' or v == 'Tray Number':
             tray_number_index = c
 
-#print(f"'Tray Number' index is: {tray_number_index}")
-
-
-
-# loop through 'rows' to make dictionary of lists with tray_number as the key and associated addresses as values
 
 
 dict_trays = {}
@@ -56,13 +51,16 @@ for row in rows:
 
 # print tray number (x), number of items in the list (pieces in tray), the addresses in the tray.
 for x, y in dict_trays.items():
-    print(x, len(y) ,y)
+    print(x, len(y))
 
 
 # sorting the dictionary by length of list (aka number of pieces in the tray)
 
 res = sorted(dict_trays, key=lambda key: len(dict_trays[key]), reverse=True)
-#print("Here is the output of sorting trays by length of list (res2) \n", res)
+
+# print out order of trays and piece count for tray
+
+print(res)
 
 # reassemble list with new sort based on piece count.
 
@@ -70,9 +68,8 @@ final_output = []
 for number in res:
     final_output.append(dict_trays[number])
 
-#pprint(final_output)
 
-with open('sorted_output.csv', 'w', encoding='iso-8859-1', newline='') as f:
+with open('sorted_output.csv', 'w', encoding='UTF8', newline='') as f:
     writer = csv.writer(f, delimiter=',')
 
     # write the header
@@ -84,5 +81,3 @@ with open('sorted_output.csv', 'w', encoding='iso-8859-1', newline='') as f:
         writer.writerows(line)
 
 
-#print("Output is located at " + os.path.abspath('sorted_output.csv'))
-#print("File exists? " + str(os.path.exists('sorted_output.csv')))
