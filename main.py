@@ -76,7 +76,8 @@ with open('sorted_output.csv', 'w', encoding='iso-8859-1', newline='') as f:
     writer = csv.writer(f, delimiter=',')
 
     # write the header
-    writer.writerow(headers)
+    for x in headers:
+        writer.writerow(x)
 
     # write the data
     for line in final_output:
