@@ -1,6 +1,8 @@
  # Purpose: open mailing address lists to re-sort trays based on most-full trays first
 import csv
 from tkinter import filedialog as fd
+from tkinter import Label
+
 
 
 # OPEN CSV, EXTRACT HEADERS AND ROWS
